@@ -1,0 +1,49 @@
+﻿Build started 6/10/2013 10:22:25 PM.
+Project "F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\hw2\hw2.vcxproj" on node 2 (build target(s)).
+InitializeBuildStatus:
+  Creating "Debug\ray_traycer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QTriangle.cpp main.cpp
+  main.cpp
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(50): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(59): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(60): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(61): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(65): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(66): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(68): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(83): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(253) : see declaration of 'fscanf'
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(96): warning C4018: '<' : signed/unsigned mismatch
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(164): warning C4018: '<' : signed/unsigned mismatch
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(173): warning C4018: '<' : signed/unsigned mismatch
+f:\dropbox\document\classes\image_synthesis\homework\final project\hw2\main.cpp(188): warning C4018: '<' : signed/unsigned mismatch
+  QTriangle.cpp
+  Generating Code...
+Link:
+  c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\ray_traycer.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.lib" /MACHINE:X86 Debug\QBall.obj
+  Debug\QImplicitSurface.obj
+  Debug\QPlane.obj
+  Debug\QTriangle.obj
+  Debug\QVector.obj
+  Debug\main.obj
+  Debug\ViewingParams.obj
+  LINK : F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.exe not found or not built by the last incremental link; performing full link
+  hw2.vcxproj -> F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.exe
+Manifest:
+  c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\Debug\ray_traycer.exe;#1" /manifest Debug\ray_traycer.exe.intermediate.manifest
+FinalizeBuildStatus:
+  Deleting file "Debug\ray_traycer.unsuccessfulbuild".
+  Touching "Debug\ray_traycer.lastbuildstate".
+Done Building Project "F:\Dropbox\Document\Classes\Image_synthesis\homework\final project\hw2\hw2.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.47

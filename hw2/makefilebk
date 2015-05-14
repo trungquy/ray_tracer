@@ -1,0 +1,5 @@
+all:
+	gcc main.cpp -o demo
+c11:
+	gcc -std=c++11 main.cpp -o demo
+

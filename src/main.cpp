@@ -132,7 +132,6 @@ void readInputFile(bool readObjOnly = false) {
                 break;
             case OBJ_TYPE_IMPLICIT:
             {
-
                 // implicit surface object
                 if (fabs(values[5]) > EPSILON)
                     is_sqecular = true;
@@ -246,14 +245,14 @@ QVector trace(const QVector& rayOrig, const QVector& rayDir, double eta_I, doubl
         }
         //combine colors
         pColor = hitColor * (1 - hitObj->getReflection() - hitObj->getRefraction()) + reflecColor * hitObj->getReflection() + refracColor * hitObj->getRefraction();
-        //shadow effect			
+        //shadow effect
         QVector shadowRay = lightSrc - phit;
         bool isInShadow = false;
         if (isInShadowArea(phit, shadowRay, hit_id)) {
             pColor = pColor*SHADOW;
             isInShadow = true;
         }
-        if (!isInShadow && hitObj->isSqecular()) {// Don't have highlight effect in shadow area		
+        if (!isInShadow && hitObj->isSqecular()) {// Don't have highlight effect in shadow area
             QVector R = QVector::reflect(phit - lightSrc, N);
             double costheta2 = pow(QVector::cos(R, rayOrig - phit), N_HL);
             //if(depth_level == 1 && costheta2 > HIGHLIGHT_MIN){
@@ -275,10 +274,10 @@ void display(SDL_Surface *sdl_screen) {
     //readInputFile(true);
 
     //glBegin(GL_POINTS);
-    //for (int i = -nx2; i < nx2; i++)
-    for (int i = 0; i < 2*nx2; i++)
-        //for (int j = -ny2; j < ny2; j++) {
-        for (int j = 0; j < 2*ny2; j++) {
+    for (int i = -nx2; i < nx2; i++)
+    //for (int i = 0; i < 2*nx2; i++)
+        for (int j = -ny2; j < ny2; j++) {
+        //for (int j = 0; j < 2*ny2; j++) {
             //glVertex2i(i, j);
             QVector pColor;
             if (!ANTI_ALIASING) {
@@ -306,7 +305,7 @@ void display(SDL_Surface *sdl_screen) {
             //glColor3d(pColor.getX(), pColor.getY(), pColor.getZ());
             Uint32 color = SDL_MapRGB(sdl_screen->format, (int)(pColor.getX()*255), (int)(pColor.getY()*255), (int)(pColor.getZ()*255));
             //Uint32 color = SDL_MapRGB(sdl_screen->format, 0xff, 0xff, 0x00);
-            putpixel(sdl_screen, i, j, color);
+            putpixel(sdl_screen, i+nx2, -j+ny2-1, color);
             //SDL_UpdateRect(sdl_screen, i, j, 1, 1);
             //SDL_Flip(sdl_screen);
         }
@@ -339,7 +338,7 @@ int main(int argc, char **argv) {
     }
     cout << "Input file:" << data << endl;
     readInputFile();
-    
+
     SDL_Surface *sdl_screen;
     int quit = 0;
     SDL_Event event;
@@ -358,14 +357,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Couldn't set 800x600x24 video mode: %s\n", SDL_GetError());
         return -2;
     }
-    
-    SDL_Surface* layer = SDL_CreateRGBSurface(SDL_HWSURFACE, sdl_screen->w, sdl_screen->h,
-        sdl_screen->format->BitsPerPixel,
-        sdl_screen->format->Rmask,
-        sdl_screen->format->Gmask,
-        sdl_screen->format->Bmask,
-        sdl_screen->format->Amask
-    );
+
 
     // Map the color yellow to this display (R=0xff, G=0xFF, B=0x00)
     yellow = SDL_MapRGB(sdl_screen->format, 0xff, 0xff, 0x00);
@@ -386,7 +378,7 @@ int main(int argc, char **argv) {
                     if (event.key.keysym.sym == SDLK_F1)
                         SDL_WM_ToggleFullScreen(sdl_screen); // Only on X11
                     break;
-                case SDL_ACTIVEEVENT:                    
+                case SDL_ACTIVEEVENT:
                     if (event.active.gain){
                         need_update = 1;
                     } else {
@@ -427,14 +419,14 @@ int main(int argc, char **argv) {
             //SDL_UpdateRect(sdl_screen,0,0,0,0);
             //SDL_GL_SwapBuffers();
             //SDL_BlitSurface(layer, NULL, sdl_screen, NULL);
-            SDL_Flip(sdl_screen); 
+            SDL_Flip(sdl_screen);
             need_update = 0;
             first = 0;
             cout << "screen updated \n";
-            SDL_Delay(500);
+            SDL_Delay(5);
         }
     }
-
+    SDL_FreeSurface(sdl_screen);
     SDL_Quit();
 
     return 0;

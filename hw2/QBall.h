@@ -3,6 +3,7 @@
 
 #include "QObject.h"
 #include "QVector.h"
+#include <math.h>
 
 class QBall:public QObject {
 private:

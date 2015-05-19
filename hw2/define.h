@@ -13,7 +13,7 @@
 #define DEPTH_MAX 7
 #define AIR_ETA 1
 #define ANTI_ALIASING 1
-#define NUM_SUB_ANTI_ALIASING 3
+#define NUM_SUB_ANTI_ALIASING 2
 
 // Colors
 #define COLOR_WHITE		0xffffff

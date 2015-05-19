@@ -4,6 +4,7 @@
 #include "define.h"
 #include <iostream>
 #include <string>
+#include <math.h>
 class QObject{
 protected:
 	double reflection; /*reflection rate: mirror = 1 , diffuse=0 */

@@ -57,7 +57,7 @@ bool QImplicitSurface::intervalApproximate(double t1, double t2, double *t,const
 	
 	if(!(f_min<=EPSILON && f_max>=EPSILON))
 		return false;
-	if(abs(t2-t1) < EPSILON){
+	if(fabs(t2-t1) < EPSILON){
 		*t = m;		
 		return true;
 	}
@@ -120,7 +120,7 @@ bool QImplicitSurface::calInitialRange(const QVector& rayOrig, const QVector& ra
 }
 
 void QImplicitSurface::calQuadRange(double coff_a, double coff_b, double coff_c, double t1, double t2, double *r1, double *r2){
-	if (abs(coff_a)<EPSILON) {
+	if (fabs(coff_a)<EPSILON) {
 		*r1 = coff_b*t1 + coff_c;
 		*r2 = coff_b*t2 + coff_c;
 		if (coff_b<0) swap(r1, r2);

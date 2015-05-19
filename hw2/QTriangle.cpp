@@ -25,7 +25,7 @@ QTriangle::QTriangle(const QVector& _p0,const QVector& _p1,const QVector& _p2, c
 
 bool QTriangle::intersect(const QVector& rayOrig, const QVector& rayDir, double* t){
 	double k = rayDir*normal;
-	if( abs(k) < EPSILON){//k == 0		
+	if( fabs(k) < EPSILON){//k == 0		
 		return false;
 	}
 	*t = (-(rayOrig - p0)*normal)/k;

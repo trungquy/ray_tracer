@@ -40,7 +40,7 @@ QVector QPlane::getColor() const{
 
 bool QPlane::intersect(const QVector& rayOrig, const QVector& rayDir, double* t){
 	double k = rayDir*normal;
-	if( abs(k) < EPSILON){//k == 0		
+	if( fabs(k) < EPSILON){//k == 0		
 		return false;
 	}
 	*t = (-(rayOrig - point)*normal)/k;

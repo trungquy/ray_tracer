@@ -8,4 +8,14 @@
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/QVector.cpp</file>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/makefile</file>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/QVector.h</file>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/main_opengl1x.cpp</file>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/main.cpp</file>
+            <file>file:/media/sf_Dropbox/GitHub/ray_tracer/hw2/QTriangle.h</file>
+        </group>
+    </open-files>
 </project-private>

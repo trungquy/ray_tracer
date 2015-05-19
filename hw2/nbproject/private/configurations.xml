@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="89">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="." name="hw2">
+    <df root="." name="0">
       <df name="Debug">
+      </df>
+      <df name="GL">
+        <df name="internal">
+          <in>dri_interface.h</in>
+          <in>glcore.h</in>
+        </df>
+        <in>freeglut.h</in>
+        <in>freeglut_ext.h</in>
+        <in>freeglut_std.h</in>
+        <in>gl.h</in>
+        <in>gl_mangle.h</in>
+        <in>glext.h</in>
+        <in>glu.h</in>
+        <in>glu_mangle.h</in>
+        <in>glut.h</in>
+        <in>glx.h</in>
+        <in>glx_mangle.h</in>
+        <in>glxext.h</in>
+        <in>glxint.h</in>
+        <in>glxmd.h</in>
+        <in>glxproto.h</in>
+        <in>glxtokens.h</in>
       </df>
       <df name="Release">
       </df>
@@ -17,11 +39,14 @@
       <in>QTriangle.h</in>
       <in>QVector.cpp</in>
       <in>QVector.h</in>
+      <in>SDLStage.cpp</in>
+      <in>SDLStage.h</in>
       <in>ScreenParams.h</in>
       <in>ViewingParams.cpp</in>
       <in>ViewingParams.h</in>
       <in>define.h</in>
       <in>main.cpp</in>
+      <in>main_opengl1x.cpp</in>
     </df>
   </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
@@ -33,13 +58,13 @@
       </toolsSet>
       <compile>
         <compiledirpicklist>
-          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
           <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
         </compiledirpicklist>
         <compiledir>${AUTO_FOLDER}</compiledir>
         <compilecommandpicklist>
-          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
           <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
         </compilecommandpicklist>
         <compilecommand>${AUTO_COMPILE}</compilecommand>
       </compile>

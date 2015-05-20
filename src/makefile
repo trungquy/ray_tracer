@@ -4,8 +4,9 @@ EMCC=emcc
 #CFLAGS= -g -Wall -w -std=c++11
 CFLAGS= -std=c++11
 INCLUDE= -I/usr/local/include
-LIBS= -lGL -lGLU -lglut -lSDL
-SOURCES=  main.cpp  QBall.cpp  QImplicitSurface.cpp  QPlane.cpp  QTriangle.cpp  QVector.cpp  ViewingParams.cpp SDLStage.cpp
+#LIBS= -lGL -lGLU -lglut -lSDL
+LIBS= -lSDL
+SOURCES=  main.cpp  QBall.cpp  QImplicitSurface.cpp  QPlane.cpp  QTriangle.cpp  QVector.cpp  ViewingParams.cpp
 PRELOAD=data.txt
 EXEC=demo
 #EXEC=demo.js

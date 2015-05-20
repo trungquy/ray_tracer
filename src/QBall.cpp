@@ -59,6 +59,7 @@ bool QBall::intersect(const QVector& rayOrig, const QVector& rayDir, double* t) 
         return false;
     // choose smaller positive t for 1st hitting point	
     *t = t1 < t2 ? (t1 > 0 ? t1 : t2) : (t2 > 0 ? t2 : t1);
+    //if (abs((int)(*t)) < EPSILON)
     if (fabs(*t) < EPSILON)
         return false;
     phit = rayOrig + rayDir * (*t);

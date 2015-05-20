@@ -1,6 +1,7 @@
 # ray_tracer
-Ray Tracing: [Online Demo](http://trungquy.github.io/ray_tracer/demo.html)
+I wrote this ray tracer by C++ for computer graphic class project in 2013. Recently, I improve it a bit(Use libSDL instead of OpenGL to draw the result) for my experiment with [Emscripten](http://emscripten.org). Check out my results by click the bellow link
+
+[Online Demo](http://trungquy.github.io/ray_tracer/demo.html)
  
-This demo is generated from C++ source code by Emscripten - http://emscripten.org/
 
 Quy Nguyen

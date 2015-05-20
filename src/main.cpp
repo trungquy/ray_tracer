@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <time.h>
 
 #include "define.h"
 #include "QVector.h"
@@ -51,6 +52,28 @@ int nx2;
 int ny2;
 
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+
+int64_t getMSTime(){
+    struct timespec tms;
+    /* The C11 way */
+    /*if ( !timespec_get(&tms, TIME_UTC)) {
+        return 0;
+    }*/
+
+    /* POSIX.1-2008 way */
+    if (clock_gettime(CLOCK_REALTIME,&tms)) {
+        return -1;
+    }
+    /* seconds, multiplied with 1 million */
+    int64_t micros = tms.tv_sec * 1000000;
+    /* Add full microseconds */
+    micros += tms.tv_nsec/1000;
+    /* round up if necessary */
+    if (tms.tv_nsec % 1000 >= 500) {
+        ++micros;
+    }
+    return micros;    
+}
 
 void readInputFile(bool readObjOnly = false) {
     listObjs.clear();
@@ -314,25 +337,7 @@ void display(SDL_Surface *sdl_screen) {
 }
 
 int main(int argc, char **argv) {
-    /*glutInit(&argc, argv);
-    if (argc >= 2) {
-        data = argv[1];
-    }
-    cout << "Input file:" << data << endl;
-    readInputFile();
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(screen.get_nx(), screen.get_ny());
-    glutCreateWindow("Figure Drawing");
-    glClearColor(backgroundColor.getX(), backgroundColor.getY(), backgroundColor.getZ(), 0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-nx2, nx2, -ny2, ny2, -1.0, 1.0);
-    glutDisplayFunc(display);
-    glutMainLoop();
-    getchar();
-    return 0;
-     */
+    
     if (argc >= 2) {
         data = argv[1];
     }
@@ -407,8 +412,10 @@ int main(int argc, char **argv) {
         //putpixel(sdl_screen, x, y, yellow);
         //display(layer);
         if (need_update || first){
+            int64_t t1, t2;
+            t1 = getMSTime();
             display(sdl_screen);
-
+            t2 = getMSTime();
             // Unlock Surface if necessary
             if (SDL_MUSTLOCK(sdl_screen)) {
                 SDL_UnlockSurface(sdl_screen);
@@ -422,8 +429,12 @@ int main(int argc, char **argv) {
             SDL_Flip(sdl_screen);
             need_update = 0;
             first = 0;
-            cout << "screen updated \n";
-            SDL_Delay(5);
+            cout << "screen updated : "<<(t2-t1)/1000.0<<"(ms)\n";
+            #ifdef EMSCRIPTEN
+                cout << "Intentionally adding SDL_Delay() to force throw error, stop program, avoid freeze browser \n";
+                SDL_Delay(5); // For Emscripten only: intentionally adding to force throw error, stop program, avoid freeze
+                // browser
+            #endif                
         }
     }
     SDL_FreeSurface(sdl_screen);

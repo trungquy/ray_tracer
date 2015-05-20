@@ -431,9 +431,12 @@ int main(int argc, char **argv) {
             first = 0;
             cout << "screen updated : "<<(t2-t1)/1000.0<<"(ms)\n";
             #ifdef EMSCRIPTEN
-                cout << "Intentionally adding SDL_Delay() to force throw error, stop program, avoid freeze browser \n";
-                SDL_Delay(5); // For Emscripten only: intentionally adding to force throw error, stop program, avoid freeze
+                //cout << "Intentionally adding SDL_Delay() to force throw error, stop program, avoid freeze browser \n";
+                //SDL_Delay(5); // For Emscripten only: intentionally adding to force throw error, stop program, avoid freeze
                 // browser
+                SDL_FreeSurface(sdl_screen);
+                SDL_Quit();
+                return 0;
             #endif                
         }
     }

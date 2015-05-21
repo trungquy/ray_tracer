@@ -3,16 +3,21 @@ I wrote this ray tracer by C++ for computer graphic class project in 2013. Recen
 
 [Online Demo](http://trungquy.github.io/ray_tracer/demo.html)
 
-For Ubuntu users:
-Compiling Requirements: (MakeFile is provided for native and JS compiling)
-    - LibSDL1.x
-    - C++11 support compiler
-    - Emscripten for C++ to JS convert
-How to comile source:
-    - To native code: 
+##Compiling Requirements:
+(MakeFile is provided for native and JS compiling)
+- LibSDL1.x
+- C++11 support compiler
+- Emscripten for C++ to JS convert
+
+How to compile source:
+- To native code:
+``` 
         1. cd ./src/
         2. make 
-    - To JavaScript code:
+```
+- To JavaScript code:
+```
         1. cd ./src/
         2. make js
+```
 Quy Nguyen

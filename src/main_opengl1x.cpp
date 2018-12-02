@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <time.h>
 
 #include "define.h"
 #include "QVector.h"
@@ -45,6 +46,40 @@ char *data = "data.txt";
 QVector backgroundColor = QVector::parseColor(COLOR_SKY);
 int nx2;
 int ny2;
+
+// void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+
+int64_t getMSTime(){
+    struct timespec tms;
+    /* The C11 way */
+    /*if ( !timespec_get(&tms, TIME_UTC)) {
+        return 0;
+    }*/
+
+    /* POSIX.1-2008 way */
+    if (clock_gettime(CLOCK_REALTIME,&tms)) {
+        return -1;
+    }
+    /* seconds, multiplied with 1 million */
+    int64_t micros = tms.tv_sec * 1000000;
+    /* Add full microseconds */
+    micros += tms.tv_nsec/1000;
+    /* round up if necessary */
+    if (tms.tv_nsec % 1000 >= 500) {
+        ++micros;
+    }
+    return micros;    
+}
+
+void updateParameters(){
+    direction = lookAtPt - eye;
+    g_view = ViewingParams(eye, direction, headUp);
+}
+
+void moveEye(int dx, int dy, int dz){
+    eye = eye + QVector(dx, dy, dz);
+    updateParameters();
+}
 
 void readInputFile(bool readObjOnly = false) {
     listObjs.clear();
@@ -264,10 +299,10 @@ QVector trace(const QVector& rayOrig, const QVector& rayDir, double eta_I, doubl
     return pColor;
 }
 
-void display() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    //readInputFile(true);
-    glBegin(GL_POINTS);
+void draw(){
+    int64_t t1, t2;
+    int n_ray = 0;
+    t1 = getMSTime();
     for (int i = -nx2; i < nx2; i++)
         for (int j = -ny2; j < ny2; j++) {
             glVertex2i(i, j);
@@ -277,6 +312,7 @@ void display() {
                 p = g_view.calPosInWorldCoord(p);
                 QVector ray = p - eye;
                 pColor = trace(eye, ray, AIR_ETA, INFINITY, 1);
+                n_ray++;
             } else {
                 //Jittered anti-aliasing
                 for (int xx = 0; xx < NUM_SUB_ANTI_ALIASING; xx++) {
@@ -290,12 +326,26 @@ void display() {
                         p = g_view.calPosInWorldCoord(p);
                         QVector ray = p - eye;
                         pColor = pColor + trace(eye, ray, AIR_ETA, INFINITY, 1);
+                        n_ray++;
                     }
                 }
                 pColor = pColor / (NUM_SUB_ANTI_ALIASING * NUM_SUB_ANTI_ALIASING);
             }
             glColor3d(pColor.getX(), pColor.getY(), pColor.getZ());
         }
+    t2 = getMSTime();
+    cout << "Processing time: " << (t2 - t1)/1000000.0 << "(s)" << " - " << n_ray << " rays" <<endl;
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    //readInputFile(true);
+    glBegin(GL_POINTS);
+    while (1) {
+        draw();
+        moveEye(0, 100, 0);
+    }
+    
     glEnd();
     glFlush();
 }
@@ -308,9 +358,10 @@ int main(int argc, char **argv) {
     cout << "Input file:" << data << endl;
     readInputFile();
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    // glutInitDisplayMode(GLUT_RGB);
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(screen.get_nx(), screen.get_ny());
-    glutCreateWindow("Figure Drawing");
+    glutCreateWindow("Ray Tracing");
     glClearColor(backgroundColor.getX(), backgroundColor.getY(), backgroundColor.getZ(), 0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

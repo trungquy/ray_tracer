@@ -1,11 +1,11 @@
-# ray_tracer
+# Ray traceing
 
 A ray tracing implementation support:
 
 - Objects: Ball, triangle, implicit surface
 - Features: shadowing, reflection, refraction, anti-aliasing
 
-Demo: [click here](http://trungquy.github.io/ray_tracer/)
+Browser version: [click here](http://trungquy.github.io/ray_tracer/)
 
 ## Requirements
 
@@ -29,7 +29,4 @@ MakeFile is provided for native and JS compiling
 ```
 
 ## Todo
-
-- Replace libsdl by opengl
-- WebAssembly version, fall back to javascript
 - Nagivate in space with keyboard

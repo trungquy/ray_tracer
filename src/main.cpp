@@ -75,13 +75,27 @@ int64_t getMSTime(){
     return micros;    
 }
 
+void updateParameters(){
+    direction = lookAtPt - eye;
+    g_view = ViewingParams(eye, direction, headUp);
+}
+
+void moveCircle(int cx, int cy, int r){
+
+}
+
+void moveEye(int dx, int dy, int dz){
+    eye = eye + QVector(dx, dy, dz);
+    updateParameters();
+}
+
 void readInputFile(bool readObjOnly = false) {
     listObjs.clear();
     FILE *f;
     QObject obj;
 
     f = fopen(data, "r");
-    if (f <= 0) {
+    if (f == NULL) {
         cout << "File Opening error" << endl;
         exit(0);
     }
@@ -292,7 +306,10 @@ QVector trace(const QVector& rayOrig, const QVector& rayDir, double eta_I, doubl
     return pColor;
 }
 
-void display(SDL_Surface *sdl_screen) {
+void draw(SDL_Surface *sdl_screen){
+    int64_t t1, t2;
+    int n_ray = 0;
+    t1 = getMSTime();
     //glClear(GL_COLOR_BUFFER_BIT);
     //readInputFile(true);
 
@@ -308,6 +325,7 @@ void display(SDL_Surface *sdl_screen) {
                 p = g_view.calPosInWorldCoord(p);
                 QVector ray = p - eye;
                 pColor = trace(eye, ray, AIR_ETA, INFINITY, 1);
+                n_ray++;
             } else {
                 //Jittered anti-aliasing
                 for (int xx = 0; xx < NUM_SUB_ANTI_ALIASING; xx++) {
@@ -321,6 +339,7 @@ void display(SDL_Surface *sdl_screen) {
                         p = g_view.calPosInWorldCoord(p);
                         QVector ray = p - eye;
                         pColor = pColor + trace(eye, ray, AIR_ETA, INFINITY, 1);
+                        n_ray++;
                     }
                 }
                 pColor = pColor / (NUM_SUB_ANTI_ALIASING * NUM_SUB_ANTI_ALIASING);
@@ -332,6 +351,21 @@ void display(SDL_Surface *sdl_screen) {
             //SDL_UpdateRect(sdl_screen, i, j, 1, 1);
             //SDL_Flip(sdl_screen);
         }
+    t2 = getMSTime();
+    cout << "Processing time: " << (t2 - t1)/1000000.0 << "(s)" << " - " << n_ray << " rays" <<endl;
+    //glEnd();
+    //glFlush();
+}
+
+void display(SDL_Surface *sdl_screen) {
+    //glClear(GL_COLOR_BUFFER_BIT);
+    //readInputFile(true);
+    //glBegin(GL_POINTS);
+    while (1) {
+        draw(sdl_screen);
+        moveEye(0, 100, 0);
+    }
+    
     //glEnd();
     //glFlush();
 }
@@ -383,19 +417,20 @@ int main(int argc, char **argv) {
                     if (event.key.keysym.sym == SDLK_F1)
                         SDL_WM_ToggleFullScreen(sdl_screen); // Only on X11
                     break;
-                case SDL_ACTIVEEVENT:
-                    if (event.active.gain){
-                        need_update = 1;
-                    } else {
-                        need_update = 0;
-                        //printf("inactive\n");
-                        cout << "inactive \n";
-                    }
-                    break;
+                // case SDL_ACTIVEEVENT:
+                //     if (event.active.gain){
+                //         need_update = 1;
+                //     } else {
+                //         need_update = 0;
+                //         //printf("inactive\n");
+                //         cout << "inactive \n";
+                //     }                    
+                //     break;
                 case SDL_QUIT:
                     quit = 1;
                     break;
                 default:
+                    need_update = 1;
                     break;
             }
         }
@@ -414,7 +449,10 @@ int main(int argc, char **argv) {
         if (need_update || first){
             int64_t t1, t2;
             t1 = getMSTime();
-            display(sdl_screen);
+            // display(sdl_screen);
+            draw(sdl_screen);
+            moveEye(0, 50, 0);
+
             t2 = getMSTime();
             // Unlock Surface if necessary
             if (SDL_MUSTLOCK(sdl_screen)) {
@@ -427,13 +465,10 @@ int main(int argc, char **argv) {
             //SDL_GL_SwapBuffers();
             //SDL_BlitSurface(layer, NULL, sdl_screen, NULL);
             SDL_Flip(sdl_screen);
-            need_update = 0;
+            // need_update = 0;
             first = 0;
-            cout << "screen updated : "<<(t2-t1)/1000.0<<"(ms)\n";
-            #ifdef EMSCRIPTEN
-                //cout << "Intentionally adding SDL_Delay() to force throw error, stop program, avoid freeze browser \n";
-                //SDL_Delay(5); // For Emscripten only: intentionally adding to force throw error, stop program, avoid freeze
-                // browser
+            // cout << "screen updated : "<<(t2-t1)/1000.0<<"(ms)\n";
+            #ifdef EMSCRIPTEN                
                 SDL_FreeSurface(sdl_screen);
                 SDL_Quit();
                 return 0;

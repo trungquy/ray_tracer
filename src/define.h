@@ -12,8 +12,8 @@
 #define SHADOW 0.8
 #define DEPTH_MAX 7
 #define AIR_ETA 1
-// #define ANTI_ALIASING 1
-#define ANTI_ALIASING 0
+#define ANTI_ALIASING 1
+// #define ANTI_ALIASING 0
 #define NUM_SUB_ANTI_ALIASING 2
 
 // Colors

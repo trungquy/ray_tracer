@@ -23,5 +23,5 @@ sdl:
 	$(CC) $(CFLAGS) -O3 $(MAIN_SDL) $(SOURCES) $(INCLUDE) $(LIBS) -o $(EXEC)
 
 js:	
-	$(EMCC) $(CFLAGS) $(MAIN_GL) $(SOURCES) $(EMCC_OPTS) \
+	$(EMCC) $(CFLAGS) $(MAIN_SDL) $(SOURCES) $(EMCC_OPTS) \
 	--preload-file $(PRELOAD) -o $(OUT)

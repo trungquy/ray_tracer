@@ -5,7 +5,7 @@ A ray tracing implementation support:
 - Objects: Ball, triangle, implicit surface
 - Features: shadowing, reflection, refraction, anti-aliasing
 
-Browser version: [click here](http://trungquy.github.io/ray_tracer/)
+Demo: [click here](http://trungquy.github.io/ray_tracer/)
 
 ## Requirements
 
